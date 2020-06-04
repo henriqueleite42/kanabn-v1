@@ -1,0 +1,40 @@
+@mixin hw ($hw) {
+  min-height: $hw;
+  height: $hw;
+  max-height: $hw;
+
+  min-width: $hw;
+  width: $hw;
+  max-width: $hw;
+}
+
+@mixin h ($h) {
+  min-height: $h;
+  height: $h;
+  max-height: $h;
+}
+
+@mixin w ($w) {
+  min-width: $w;
+  width: $w;
+  max-width: $w;
+}
+
+@mixin hundred {
+  height: 100%;
+  width: 100%;
+}
+
+@mixin fullScreen {
+  @include hw(100vh, 100vw);
+}
+
+@mixin right {
+  .container {
+    padding: 1.5em;
+    overflow-y: scroll;
+    @include hw(100vh, 100%);
+  }
+
+  @include scroll(container);
+}

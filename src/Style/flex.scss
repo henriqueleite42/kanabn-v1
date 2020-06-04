@@ -1,0 +1,18 @@
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexCenterColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin flexBet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
