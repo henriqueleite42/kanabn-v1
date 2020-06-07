@@ -1,3 +1,5 @@
+import { TypeOfColors } from "Assets/Colors";
+
 export interface Comment {
   author: string;
   msg: string;
@@ -18,6 +20,7 @@ export interface Task {
     hasAttachments: number;
   };
 
+  color?: TypeOfColors;
   description?: string;
   thumbnail?: string;
   inCharge?: Array<string>;

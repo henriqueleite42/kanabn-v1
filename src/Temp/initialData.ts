@@ -45,17 +45,23 @@ export const columns: { [key: string]: Column } = {
   column1: {
     id: "column1",
     title: "Column 1",
-    tasks: ["task1", "task2"],
+    tasks: ["task1", "task2", "task3", "task4"],
   },
   column2: {
     id: "column2",
     title: "Column 2",
-    tasks: ["task3", "task4"],
+    tasks: [],
+  },
+  column3: {
+    id: "column3",
+    title: "Column 3",
+    tasks: [],
   },
 };
 
 export const panel: Panel = {
   id: "panel1",
   title: "Panel 1",
-  columns: ["column1", "column2"],
+  taskFieldDisplay: "title",
+  columns: ["column1", "column2", "column3"],
 };

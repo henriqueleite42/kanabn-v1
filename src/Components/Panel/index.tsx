@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 
+import Button from "Components/Button";
 import Column from "Components/Column";
 
 import { Column as IColumn } from "Interfaces/Column";
@@ -16,9 +17,47 @@ import {
 } from "Temp/initialData";
 
 const Panel: React.FC<{ id: string }> = ({ id }) => {
-  const [tasks, setTasks] = useState<{ [key: string]: ITask }>({});
-  const [columns, setColumns] = useState<Array<IColumn>>([]);
   const [panel, setPanel] = useState<IPanel>();
+  const [columns, setColumns] = useState<Array<IColumn>>([]);
+  const [tasks, setTasks] = useState<{ [key: string]: ITask }>({});
+
+  const addColumn = useCallback(() => {
+    // TODO: Send Request to Create Column
+
+    const newColumn = {
+      id: `column${columns.length + 1}`,
+      title: `Column ${columns.length + 1}`,
+      tasks: [],
+    };
+
+    setColumns(prevState => [...prevState, newColumn]);
+  }, [columns.length]);
+
+  const addTask = useCallback(
+    (order: number) => {
+      // TODO: Send Request to Create Task
+      const newTask = {
+        id: `task${Object.keys(tasks).length + 1}`,
+        title: `Task ${Object.keys(tasks).length + 1}`,
+        attibutes: {
+          hasDescription: false,
+          hasComments: 0,
+          hasAttachments: 0,
+        },
+      };
+
+      const newColumns = columns.slice();
+
+      newColumns[order].tasks.push(newTask.id);
+
+      setColumns(newColumns);
+      setTasks(prevState => ({
+        ...prevState,
+        [newTask.id]: newTask,
+      }));
+    },
+    [columns, tasks],
+  );
 
   const changeColumnOrder = useCallback(
     (result: DropResult) => {
@@ -81,10 +120,20 @@ const Panel: React.FC<{ id: string }> = ({ id }) => {
                   id={column.id}
                   order={index}
                   title={column.title}
+                  addTask={addTask}
                   tasks={tasks ? column.tasks.map(id => tasks[id]) : []}
+                  taskFieldDisplay={panel?.taskFieldDisplay || "title"}
                 />
               ))}
               {placeholder}
+              <Button
+                width="350px"
+                variant="dashed"
+                size="lg"
+                onClick={addColumn}
+              >
+                Add Column
+              </Button>
             </ColumnList>
           )}
         </Droppable>
