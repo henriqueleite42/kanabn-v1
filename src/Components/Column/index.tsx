@@ -1,22 +1,43 @@
 import React from "react";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
-import Card from "Components/Card";
+import Task from "Components/Task";
 
-import { Column as IColumn } from "Interfaces/Column";
+import { Task as ITask } from "Interfaces/Task";
 
-import style from "./style.module.scss";
+import { Container, TaskList, Title } from "./style";
 
-interface Props extends IColumn {
-  index: number;
+interface Props {
+  id: string;
+  title: string;
+  order: number;
+  tasks: Array<ITask>;
 }
 
-const Column: React.FC<Props> = ({ cards }) => {
+const Column: React.FC<Props> = ({ id, title, order, tasks }) => {
   return (
-    <div className={style["container"]}>
-      {cards.map((card, index) => (
-        <Card key={card.id} index={index} {...card} />
-      ))}
-    </div>
+    <Draggable draggableId={id} index={order}>
+      {({ innerRef, draggableProps, dragHandleProps }) => (
+        <Container ref={innerRef} {...draggableProps} {...dragHandleProps}>
+          <Title>{title}</Title>
+          <Droppable droppableId={id} type="task">
+            {({ innerRef, placeholder, droppableProps }) => (
+              <TaskList ref={innerRef} {...droppableProps}>
+                {tasks.map((task, index) => (
+                  <Task
+                    key={task.id}
+                    id={task.id}
+                    order={index}
+                    title={task.title}
+                  />
+                ))}
+                {placeholder}
+              </TaskList>
+            )}
+          </Droppable>
+        </Container>
+      )}
+    </Draggable>
   );
 };
 

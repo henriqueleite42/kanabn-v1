@@ -1,35 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-import Column from "Components/Column";
+import Panel from "Components/Panel";
 
-import { Column as IColumn } from "Interfaces/Column";
+import { Panel as IPanel } from "Interfaces/Panel";
 
-import style from "./style.module.scss";
+import { Container } from "./style";
+
+import { panel as TempPanel } from "Temp/initialData";
 
 const Home: React.FC = () => {
-  const [columns, setColumns] = useState<Array<IColumn>>([]);
+  const [panel, setPanel] = useState<IPanel>();
 
-  useEffect(() => {
-    setColumns([
-      {
-        id: "column-1",
-        cards: [
-          {
-            id: "card-1",
-            text: "aaa",
-          },
-        ],
-      },
-    ]);
-  });
+  useEffect(() => setPanel(TempPanel), []);
 
-  return (
-    <div className={style["container"]}>
-      {columns.map((column, index) => (
-        <Column key={column.id} index={index} {...column} />
-      ))}
-    </div>
-  );
+  return <Container>{panel && <Panel id={panel.id} />}</Container>;
 };
 
 export default Home;

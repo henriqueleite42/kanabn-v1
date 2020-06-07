@@ -7,7 +7,8 @@
   overflow-x: hidden;
 }
 
-html, body {
+html,
+body {
   height: 100vh;
   font-family: Nunito, Helvetica, Arial, sans-serif;
   text-rendering: optimizeLegibility;
@@ -16,7 +17,7 @@ html, body {
 }
 
 html {
-  // 1rem = 10px
+  /* 1rem = 10px */
   font-size: 62.5%;
 }
 

@@ -10,13 +10,16 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "import-helpers"],
+  "plugins": ["react", "react-hooks", "import-helpers"],
   "rules": {
     "react/jsx-uses-react": 1,
     "react/prop-types": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "no-param-reassign": "error",
+    "react/display-name": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "import-helpers/order-imports": [
       "warn",
       {
@@ -33,7 +36,8 @@
           "/Constants/",
           "/Interfaces/",
           "/Assets/",
-          "/style/"
+          "/style/",
+          "/Temp/"
         ],
         "alphabetize": {
           "order": "asc",
