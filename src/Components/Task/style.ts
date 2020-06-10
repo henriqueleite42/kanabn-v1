@@ -8,4 +8,5 @@ export const Container = styled.div<{ color?: TypeOfColors }>`
     checkIfIsDarkOrLight(color || "white") ? "white" : "black"};
   padding: 1rem;
   border-radius: 0.3rem;
+  cursor: pointer !important;
 `;
